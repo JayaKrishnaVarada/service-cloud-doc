@@ -732,7 +732,7 @@ embeddedServiceLiveAgentStateChatItem .nameAndTimeContent {
         </script>
 
         <script>
-            function initialBotLoad(e) {
+           function initialBotLoad(e) {
     if (e.srcElement.innerText == "Go Back" || e.srcElement.innerText == "Confirm End Chat") {
         getMenuListIndex();
     }
@@ -748,7 +748,9 @@ function getMenuListIndex() {
 }
 
 function formatMainMenu(classIndex) {
+    if(document.getElementsByClassName("rich-menu-items") && document.getElementsByClassName("rich-menu-items")[classIndex]){
     document.getElementsByClassName("rich-menu-items")[classIndex].classList.add("main-menu-list");
+    }
 }
 
 function messageListener(e) {
@@ -785,7 +787,9 @@ function messageListener(e) {
     /* handle minimize icon change on close button click */
     if ("method" in e.data && e.data.method == "session.deletedSessionData") {
         if (e.data.data.indexOf("ESW_IS_MINIMIZED") != -1) {
+            if(document.querySelector('.page-wrapper .page-left-wrapper .page-header-wrapper .header-wrap .utility-wrapper')){
             document.querySelector('.page-wrapper .page-left-wrapper .page-header-wrapper .header-wrap .utility-wrapper').classList.remove('greyBannerPlacement');
+            }
             let el = document.getElementsByClassName("chatbotStickyIcon")[0];
             el.classList.remove("minimized");
             
@@ -830,7 +834,7 @@ function showEmbeddedDiv(el) {
         }
     }
     globVar = true;
-    if ("none" == getComputedStyle(document.querySelector(".sidebar-isi .isi-wrapper")).display){
+    if (document.querySelector(".sidebar-isi .isi-wrapper") && "none" == getComputedStyle(document.querySelector(".sidebar-isi .isi-wrapper")).display){
         document.querySelector('.page-wrapper .page-left-wrapper .page-header-wrapper .header-wrap .utility-wrapper').classList.add('greyBannerPlacement');
     }
 }
@@ -884,7 +888,7 @@ embedded_svc.addEventHandler("onChatEndedByChasitor", function(data) {
 
     function setBotDimension(){
     let dockableContainerVar =  document.getElementsByClassName("dockableContainer")[0];
-        if(getComputedStyle(document.querySelector(".sidebar-isi .isi-wrapper")).display == "none" ) {
+        if(document.querySelector(".sidebar-isi .isi-wrapper") && getComputedStyle(document.querySelector(".sidebar-isi .isi-wrapper")).display == "none" ) {
             if (dockableContainerVar){
                 dockableContainerVar.style.top = getComputedStyle(document.querySelector(".page-wrapper .page-left-wrapper .page-header-wrapper .header-wrap .utility-wrapper")).height;
                 dockableContainerVar.style.left = 0;
@@ -922,6 +926,7 @@ embedded_svc.addEventHandler("onChatEndedByChasitor", function(data) {
         setBotDimension();
     }, 300);
     });
+
         </script>
     </body>
 </html>
