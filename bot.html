@@ -902,11 +902,11 @@ embedded_svc.addEventHandler("onChatEndedByChasitor", function(data) {
                 document.getElementsByClassName("chatbotStickyIcon")[0].style.bottom = "25%";
             }
         } else {
-            var isiElementStyle = getComputedStyle(document.querySelector(".sidebar-isi .isi-wrapper"));
+            var isiElementStyle = (document.querySelector(".sidebar-isi .isi-wrapper")) ? getComputedStyle(document.querySelector(".sidebar-isi .isi-wrapper")) : null;
             if (dockableContainerVar){
                 dockableContainerVar.style.bottom = window.innerHeight*0.15 + 40 + "px";
                 dockableContainerVar.style.height = window.innerHeight*0.8 - 80 + "px";
-                dockableContainerVar.style.right = parseInt(isiElementStyle.right.split("px")[0]) + parseInt(isiElementStyle.width.split("px")[0]) + 45 + "px";
+                dockableContainerVar.style.right = parseInt(isiElementStyle.right.split("px")[0]) + ((isiElementStyle) ? parseInt(isiElementStyle.width.split("px")[0]) : 0)+ 45 + "px";
                 dockableContainerVar.style.width = 320 + "px";
                 dockableContainerVar.style.top = "auto";
                 dockableContainerVar.style.left = "auto";
